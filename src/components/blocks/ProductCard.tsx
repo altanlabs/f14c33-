@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { useToast } from "@/hooks/use-toast";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: string;
@@ -15,6 +16,7 @@ interface ProductCardProps {
 export function ProductCard({ id, name, price, image, category }: ProductCardProps) {
   const { toast } = useToast();
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     toast({
@@ -38,8 +40,12 @@ export function ProductCard({ id, name, price, image, category }: ProductCardPro
     });
   };
 
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
+
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden cursor-pointer" onClick={handleCardClick}>
       <CardHeader className="p-0 relative">
         <div className="aspect-square overflow-hidden">
           <img
@@ -52,7 +58,10 @@ export function ProductCard({ id, name, price, image, category }: ProductCardPro
           variant="ghost"
           size="icon"
           className="absolute top-2 right-2"
-          onClick={toggleFavorite}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorite();
+          }}
         >
           <Heart className={`h-5 w-5 ${isFavorite ? "text-red-500" : "text-muted-foreground"}`} />
         </Button>
@@ -63,10 +72,16 @@ export function ProductCard({ id, name, price, image, category }: ProductCardPro
         <div className="mt-2 font-bold">${price.toLocaleString()}</div>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex gap-2">
-        <Button onClick={handleAddToCart} className="flex-1">
+        <Button onClick={(e) => {
+          e.stopPropagation();
+          handleAddToCart();
+        }} className="flex-1">
           <ShoppingCart className="mr-2 h-4 w-4" /> В корзину
         </Button>
-        <Button onClick={handleBuyNow} variant="outline" className="flex-1">
+        <Button onClick={(e) => {
+          e.stopPropagation();
+          handleBuyNow();
+        }} variant="outline" className="flex-1">
           Купить
         </Button>
       </CardFooter>
