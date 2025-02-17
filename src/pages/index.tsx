@@ -1,9 +1,11 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, ShoppingCart } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { ProductCard } from "@/components/blocks/ProductCard"
 import { CategoryCard } from "@/components/blocks/CategoryCard"
+import { CartSheet } from "@/components/blocks/CartSheet"
+import { UserBalance } from "@/components/blocks/UserBalance"
 
 // Sample data (will be replaced with database later)
 const featuredProducts = [
@@ -64,12 +66,13 @@ export default function IndexPage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="border-b">
+      <nav className="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <div className="container mx-auto flex items-center justify-between p-4">
           <h1 className="text-xl font-bold">Furniture Store</h1>
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
+          <div className="flex items-center gap-4">
+            <UserBalance />
+            <CartSheet />
+          </div>
         </div>
       </nav>
 
