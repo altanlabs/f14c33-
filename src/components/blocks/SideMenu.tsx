@@ -13,6 +13,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { SizeFilter } from "./SizeFilter";
+import { Separator } from "@/components/ui/separator";
 
 const categories = [
   {
@@ -102,6 +104,11 @@ const categories = [
 ];
 
 export function SideMenu() {
+  const handleSizeFilter = (size: { width: string; height: string; depth: string }) => {
+    console.log("Применен фильтр размеров:", size);
+    // Здесь будет логика фильтрации по размерам
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -113,7 +120,7 @@ export function SideMenu() {
         <SheetHeader>
           <SheetTitle>Категории</SheetTitle>
         </SheetHeader>
-        <div className="mt-4">
+        <div className="mt-4 space-y-6">
           <Accordion type="single" collapsible className="w-full">
             {categories.map((category, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
@@ -137,6 +144,13 @@ export function SideMenu() {
               </AccordionItem>
             ))}
           </Accordion>
+
+          <Separator />
+
+          <div className="space-y-4">
+            <h3 className="font-medium">Размеры</h3>
+            <SizeFilter onApply={handleSizeFilter} />
+          </div>
         </div>
       </SheetContent>
     </Sheet>
