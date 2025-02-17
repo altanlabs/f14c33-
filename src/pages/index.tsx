@@ -6,6 +6,10 @@ import { ProductCard } from "@/components/blocks/ProductCard"
 import { CategoryCard } from "@/components/blocks/CategoryCard"
 import { CartSheet } from "@/components/blocks/CartSheet"
 import { UserBalance } from "@/components/blocks/UserBalance"
+import { SideMenu } from "@/components/blocks/SideMenu"
+import { SearchBar } from "@/components/blocks/SearchBar"
+import { UserProfile } from "@/components/blocks/UserProfile"
+import { Favorites } from "@/components/blocks/Favorites"
 
 // Sample data (will be replaced with database later)
 const featuredProducts = [
@@ -68,10 +72,16 @@ export default function IndexPage() {
       {/* Navigation */}
       <nav className="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <div className="container mx-auto flex items-center justify-between p-4">
-          <h1 className="text-xl font-bold">Furniture Store</h1>
           <div className="flex items-center gap-4">
+            <SideMenu />
+            <h1 className="text-xl font-bold">Furniture Store</h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <SearchBar />
             <UserBalance />
+            <Favorites />
             <CartSheet />
+            <UserProfile />
           </div>
         </div>
       </nav>
